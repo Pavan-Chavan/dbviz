@@ -1,0 +1,35 @@
+.tableWrapper {
+  display: flex;
+	min-width: 200px;
+	flex-direction: column;
+}
+
+.tableNameWrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: aliceblue;
+	height: 40px;
+	border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.tableBodyWrapper {
+	background-color: aquamarine;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.rowWrapper {
+	display: flex;
+	justify-content: space-between;
+	padding: 0 4px 0 4px;
+}
+
+.columnName {
+	display: flex;
+	flex-direction: row;
+}
