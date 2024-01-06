@@ -2,7 +2,7 @@ export const initialNodes = [
   {
 		id: '1',
 		type:"table",
-		position: { x: 0, y: 0 },
+		position: { x: 200, y: 200 },
 		data: 
 			{
 				tableName:"student", 
@@ -12,17 +12,17 @@ export const initialNodes = [
 					{
 						id:"1",
 						name : "name",
-						dataType: "char"
+						dataType: "CHAR(n)"
 					},
 					{
 						id:"2",
 						name : "age",
-						dataType: "Int"
+						dataType: "NUMBER(p, s)"
 					},
 					{
 						id:"3",
 						name : "address",
-						dataType: "varchar"
+						dataType: "VARCHAR2(n)"
 					}
 				],
 			}
