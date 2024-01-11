@@ -5,20 +5,26 @@ import Table from './Table/Table';
 import { initialEdges, initialNodes } from './MockData';
 import Model from './Components/Model/Model';
 import "./App.css";
+import 'reactflow/dist/style.css';
 import { getNewColorCode, getUniqueId } from './Utilities';
+import CustomEdge from './Table/CustomEdge';
 
 const nodeTypes = {
   table: Table,
 };
 
+const edgeTypes = {
+  custom: CustomEdge
+};
 const defaultViewport = { x: 0, y: 0, zoom: 1.5 };
 
 const DbViz = ({}) => {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const { addNodes } = useReactFlow();
-
+  const initBgColor = '#1A192B';
   const [nodeName, setNodeName] = useState('Node 1');
+  const [bgColor, setBgColor] = useState(initBgColor);
   const [nodeHidden, setNodeHidden] = useState(false);
   const [model, setModel] = useState(false);
 
@@ -133,6 +139,7 @@ const DbViz = ({}) => {
 				{ 
 					tableName:"New Table", 
           isChecked:true,
+          renderConnection:false,
           tableColor: `${getNewColorCode()}`,
 					columns : [
 						{
@@ -189,10 +196,76 @@ const DbViz = ({}) => {
     );
   }
 
+  const onTableColorChange = (tableId, colorCode) => {
+    setNodes((nds) =>
+      nds.map((node) => {
+        if (node.id === tableId) {
+          node.data = {
+            ...node.data,
+            tableColor: `${colorCode}`
+          }
+        }
+        return node;
+      })
+    );
+  }
+
   const deleteTable = (tableId) => {
     setNodes((prevNodes) => prevNodes.filter((table) => table.id !== tableId));
   }
+
+  const onEdgeClick = (event,clickedEdge) => {
+    setEdges((eds) =>
+      eds.map((edge) => {
+        if (edge.id === clickedEdge.id) {
+          edge.data = {
+            ...edge.data,
+            isClicked:true
+          };
+        }
+        return edge;
+      })
+    );
+  }
   
+  const onPaneClick = () => {
+    setEdges((eds) =>
+      eds.map((edge) => {
+        if (edge.data.isClicked) {
+          edge.data = {
+            ...edge.data,
+            isClicked:false
+          };
+        }
+        return edge;
+      })
+    );
+    setNodes((nds) =>
+      nds.map((node) => {
+        if (node.data.renderConnection) {
+          node.data = {
+            ...node.data,
+            renderConnection:false
+          }
+        }
+        return node;
+      })
+    );
+  }
+
+  const onNodeClick = (e,clickedNode) => {
+    setNodes((nds) =>
+      nds.map((node) => {
+        if (node.id === clickedNode.id) {
+          node.data = {
+            ...node.data,
+            renderConnection:true
+          }
+        }
+        return node;
+      })
+    );
+  }
   return (
     <div style={{ width: '100vw', height: '100vh' }}>
       <ReactFlow
@@ -201,9 +274,15 @@ const DbViz = ({}) => {
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
       defaultViewport={defaultViewport}
-      minZoom={0.2}
+      minZoom={1}
       maxZoom={4}
       nodeTypes={nodeTypes}
+      fitView
+      className={"viewport"} 
+      edgeTypes={edgeTypes}
+      onEdgeClick={onEdgeClick}
+      onPaneClick={onPaneClick}
+      onNodeClick={onNodeClick}
       attributionPosition="bottom-left"
     >
     </ReactFlow>
@@ -213,6 +292,7 @@ const DbViz = ({}) => {
       onFieldUpdate={updateFields} 
       addColumn={addColumn} 
       addNewTable={addNewTable}
+      onTableColorChange={onTableColorChange}
       deleteColumn={deleteColumn}
       onTableNameUpdate={onTableNameUpdate}
       onAccordionUpdate={onAccordionUpdate}

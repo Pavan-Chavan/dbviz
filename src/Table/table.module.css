@@ -1,24 +1,27 @@
 .tableWrapper {
-  display: flex;
+  	display: flex;
 	min-width: 200px;
 	flex-direction: column;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
+
 
 .tableNameWrapper {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	color: #334155;
 	background-color: aliceblue;
+	border-bottom: 1px solid #606f7b66;
 	height: 40px;
 	border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
 
 .tableBodyWrapper {
-	background-color: aquamarine;
+	background-color: white;
 	display: flex;
 	flex-direction: column;
-	gap: 4px;
 	border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
 }
@@ -26,10 +29,18 @@
 .rowWrapper {
 	display: flex;
 	justify-content: space-between;
-	padding: 0 4px 0 4px;
+	padding: 4px 8px 4px 8px;
 }
 
 .columnName {
+	--tw-text-opacity: 1;
+	font-size: 12px;
 	display: flex;
+	color: rgb(96, 111, 123);
 	flex-direction: row;
+}
+
+.dataTypeWrapper {
+	font-size: 12px;
+	opacity: 0.3;
 }

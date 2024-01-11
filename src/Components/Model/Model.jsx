@@ -2,7 +2,7 @@ import React from "react";
 import "./model.css";
 import { oracleDataTypes } from "../../Constant/constant";
 
-const Model = ({onClose, nodes=[], onFieldUpdate, deleteColumn, addColumn, addNewTable, onTableNameUpdate, onAccordionUpdate, deleteTable}) => {
+const Model = ({onClose, nodes=[], onFieldUpdate, onTableColorChange, deleteColumn, addColumn, addNewTable, onTableNameUpdate, onAccordionUpdate, deleteTable}) => {
 	
 	const updateStyleOfMoreInfoModel = (id,style) => {
 		document.getElementById(id).style.display = style;
@@ -73,6 +73,7 @@ const Model = ({onClose, nodes=[], onFieldUpdate, deleteColumn, addColumn, addNe
 									</div>
 									{renderColumns(table)}
 									<div className="add-column">
+										<input className="color-change" type="color" onChange={(e)=>{onTableColorChange(table.id,e.target.value)}} defaultValue={table.data.tableColor} />
 										<button className="button-8" name={table.data.tableName} onClick={(e)=>{addColumn(e.target.name)}} role="button">Add Column</button>
 										<button className="button-8 delete-icon" name={table.id} onClick={(e)=>{deleteTable(e.target.name)}} role="button"></button>
 									</div>
@@ -88,7 +89,8 @@ const Model = ({onClose, nodes=[], onFieldUpdate, deleteColumn, addColumn, addNe
 		<div id="myModal" className="modal">
 			<div className="modal-content">
 				<div className="button-wrapper">
-					<button onClick={addNewTable} type="button" className="button-62">New Table</button>
+					<div className="model-header">Tables</div>
+					<button onClick={addNewTable} type="button" className="button-8 info">New Table</button>
 					<div onClick={onClose} className="left-arrow">
 						<span className="left-arrow-icon"></span>
 					</div>

@@ -1,8 +1,9 @@
 .model-button-wrapper {
 	position: absolute;
-	left: 10px;
-	top: 10px;
+	left: 20px;
+	top: 20px;
 	height: 40px;
+	background: white;
 	width: 40px;
 	justify-content: center;
 	align-items: center;
@@ -16,4 +17,36 @@
 	height: 20px;
 	width: 19px;
 	position: absolute;
+}
+
+.viewport {
+	background-color: #e2e8f0;
+}
+
+.three-dots-for-edge {
+	cursor: pointer;
+    height: 10px;
+    width: 10px;
+}
+
+.options-wrapper {
+	background: white;
+    position: absolute;
+    left: 70px;
+    width: 70px;
+	display: none;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.type-styls {
+	background: '#ffcc00';
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 9px;
+    font-weight: 500;
+	cursor: pointer;	
+}
+
+body {
+	margin: 0%;
 }

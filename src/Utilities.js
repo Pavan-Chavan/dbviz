@@ -3,5 +3,5 @@ export const getUniqueId = () => {
 }
 
 export const getNewColorCode = () => {
-  return `#${Math.floor(Math.random()*16777215).toString(16)}fd`;
+  return `#${Math.floor(Math.random()*16777215).toString(16)}`;
 }
